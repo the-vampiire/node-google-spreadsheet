@@ -613,7 +613,7 @@ interface GoogleSpreadsheetWorksheet extends WorksheetBasicProperties {
    * @param filters single or array of filters
    */
   loadCells(
-    filters: string | WorksheetGridRange | string[] | WorksheetGridRange[],
+    filters: string | WorksheetGridRange | string[] | WorksheetGridRange[]
   ): Promise<void>;
   /**
    * @description
@@ -636,13 +636,25 @@ interface GoogleSpreadsheetWorksheet extends WorksheetBasicProperties {
   setHeaderRow(headers: string[]): Promise<void>;
   /**
    * @description
+   * Append multiple new rows to the sheet at once
+   *
+   * @param arrayOfRowValues
+   */
+  addRows(
+    arrayOfRowValues: (
+      | Record<string, string | number | boolean>
+      | (string | number | boolean)[]
+    )[]
+  ): Promise<GoogleSpreadsheetRow[]>;
+  /**
+   * @description
    * append a row to the end of the worksheet
    *
    * @param values
    */
-  addRow(values: {
+  addRow(rowValues: {
     [header: string]: string | number | boolean;
-  }): Promise<void>;
+  }): Promise<GoogleSpreadsheetRow>;
   /**
    * @description
    * set the grid properties of the worksheet
@@ -676,7 +688,7 @@ interface GoogleSpreadsheetWorksheet extends WorksheetBasicProperties {
   updateDimensionProperties(
     columnsOrRows: WorksheetDimension,
     properties: WorksheetDimensionProperties,
-    bounds: WorksheetDimensionBounds,
+    bounds: WorksheetDimensionBounds
   ): Promise<void>;
   /**
    * @description
@@ -839,7 +851,7 @@ interface GoogleSpreadsheet extends SpreadsheetBasicProperties {
    * @param worksheetProperties all worksheet properties to set
    */
   addSheet(
-    worksheetProperties?: WorksheetBasicProperties,
+    worksheetProperties?: WorksheetBasicProperties
   ): Promise<GoogleSpreadsheetWorksheet>;
   /**
    * @description
@@ -849,7 +861,7 @@ interface GoogleSpreadsheet extends SpreadsheetBasicProperties {
    * @param worksheetProperties all worksheet properties to set
    */
   addWorksheet(
-    worksheetProperties?: WorksheetBasicProperties,
+    worksheetProperties?: WorksheetBasicProperties
   ): Promise<GoogleSpreadsheetWorksheet>;
   /**
    * @description
@@ -874,7 +886,7 @@ interface GoogleSpreadsheet extends SpreadsheetBasicProperties {
   addNamedRange(
     name: string,
     range: string | WorksheetGridRange,
-    rangeId?: string,
+    rangeId?: string
   ): Promise<void>;
   /**
    * @description
